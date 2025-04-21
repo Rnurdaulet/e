@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: django_app
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - app-net
+      - traefik_traefik-net
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: your_db
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_pass
+    networks:
+      - app-net
+
+volumes:
+  postgres_data:
+
+networks:
+  app-net:
+  traefik_traefik-net:
+    external: true
