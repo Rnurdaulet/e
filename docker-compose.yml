@@ -11,8 +11,12 @@ services:
       - .env
     depends_on:
       - db
-    ports:
-      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flowise.rule=Host(`e.odx.kz`)"  # Ваш домен
+      - "traefik.http.routers.flowise.entrypoints=websecure"  # HTTPS
+      - "traefik.http.routers.flowise.tls.certresolver=myresolver"  # Let's Encrypt
+      - "traefik.http.services.flowise.loadbalancer.server.port=3000"
     networks:
       - app-net
       - traefik_traefik-net
