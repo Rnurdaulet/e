@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.template.context_processors import static
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
+DEBUG = config("DEBUG", default="False")
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-default-key')
 
 INSTALLED_APPS = [

@@ -3,6 +3,7 @@ from .base import *
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
 
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
