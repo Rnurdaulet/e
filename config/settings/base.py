@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",  # Добавляем в начало
     'django.middleware.common.CommonMiddleware',
@@ -181,9 +182,20 @@ USE_TZ = True
 # Static & Media
 ######################################################################
 
-# Настройка статики и медиа-файлов
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # куда collectstatic будет собирать
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # откуда collectstatic будет брать файлы
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://e.odx.kz",
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ######################################################################
 # LOGIN
