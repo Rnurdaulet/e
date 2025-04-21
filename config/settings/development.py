@@ -1,9 +1,7 @@
+from decouple import config
 from .base import *
 
-DEBUG = True
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
