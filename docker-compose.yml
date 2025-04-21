@@ -13,10 +13,10 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flowise.rule=Host(`e.odx.kz`)"  # Ваш домен
-      - "traefik.http.routers.flowise.entrypoints=websecure"  # HTTPS
-      - "traefik.http.routers.flowise.tls.certresolver=myresolver"  # Let's Encrypt
-      - "traefik.http.services.flowise.loadbalancer.server.port=3000"
+      - "traefik.http.routers.django.rule=Host(`e.odx.kz`)"
+      - "traefik.http.routers.django.entrypoints=websecure"
+      - "traefik.http.routers.django.tls.certresolver=myresolver"
+      - "traefik.http.services.django.loadbalancer.server.port=8000"
     networks:
       - app-net
       - traefik_traefik-net
